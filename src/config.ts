@@ -1,4 +1,4 @@
-import {util} from 'config';
+import { util } from 'config';
 import { join } from 'path';
 export interface Config{
     server: serverConfig;

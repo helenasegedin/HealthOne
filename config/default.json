@@ -6,7 +6,7 @@
     "database":{
         "port": "3306",
         "host": "localhost",
-        "db": "news",
+        "db": "HealthOne",
         "username": "root",
         "password": "Tere12345"
     }

@@ -1,18 +1,22 @@
 import express from 'express';
+import patientsRouter from "./routes/patients.router";
+import doctorRouter from "./routes/doctors.router";
 
 const app = express();
 
-// GET - info päring
-// POST - saadab infot
-// PUT - update
-// DELETE - kustutamine
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 /**
  * 
  */
-app.get('/api', (req, res) =>{
+app.get('/api', (req, res) => {
     // output APIdoc page
     res.end("Hello");
 });
+
+// GET - info päring (kõik artiklid)
+app.use("/api/patients",patientsRouter );   
+app.use("/api/doctors",doctorRouter );
 
 export default app;
