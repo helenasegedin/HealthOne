@@ -1,11 +1,14 @@
-import { PrimaryGeneratedColumn, Column, Entity, BaseEntity, OneToMany, Timestamp, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { PrimaryGeneratedColumn, Column, Entity, BaseEntity, OneToMany, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { Patient } from "./Patient";
+import { Prescription } from "./Prescription";
+import { DoctorHistory } from "./DoctorHistory";
+import { HospitalAffiliation } from "./HospitalAffiliation";
+import { OfficeVisit } from "./OfficeVisit";
 
-// Entity dekoraator ütleb TypeORMile, kuidas sellest tabel teha ja millised väljad on olemas
 @Entity()
 export class Doctor extends BaseEntity{
     @PrimaryGeneratedColumn()
-    doctorId!: number;
+    id!: number;
 
     @Column({type: "varchar", length: 255})
     name!: string;
@@ -31,15 +34,15 @@ export class Doctor extends BaseEntity{
     @OneToMany((type) => Patient, (patient) => patient.doctor)
     patients!: Patient[];
 
-    @OneToMany((type) => Patient, (patient) => patient.doctor)
-    patients!: Patient[];
-    
-    @OneToMany((type) => Patient, (patient) => patient.doctor)
-    patients!: Patient[];
-    
-    @OneToMany((type) => Patient, (patient) => patient.doctor)
-    patients!: Patient[];
-    
-    @OneToMany((type) => Patient, (patient) => patient.doctor)
-    patients!: Patient[];
+    @OneToMany((type) => Prescription, (prescription) => prescription.doctor)
+    prescriptions!: Prescription[];
+
+    @OneToMany((type) => DoctorHistory, (doctorHistory) => doctorHistory.doctor)
+    doctorHistories!: DoctorHistory[];
+
+    @OneToMany((type) => HospitalAffiliation, (hospitalAffiliation) => hospitalAffiliation.doctor, {cascade: true})
+    hospitalAffiliations!: HospitalAffiliation[];
+
+    @OneToMany((type) => OfficeVisit, (officeVisit) => officeVisit.doctor, {cascade: true})
+    officeVisits!: OfficeVisit[];
 }

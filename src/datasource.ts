@@ -1,21 +1,28 @@
 import { DataSource } from "typeorm";
 import { config } from './config';
-import { Article } from "./entities/Patient"
-import { Author } from "./entities/Author";
+import { Patient } from "./entities/Patient"
+import { Doctor } from "./entities/Doctor";
+import { DoctorHistory } from "./entities/DoctorHistory";
+import { Hospital } from "./entities/Hospital";
+import { HospitalAffiliation } from "./entities/HospitalAffiliation";
+import { InsuranceCompany } from "./entities/InsuranceCompany";
+import { OfficeVisit } from "./entities/OfficeVisit";
+import { Prescription } from "./entities/Prescription";
+import { Drug } from "./entities/Drug";
 
-// andmebaasiühenduse konfiguratsioon
+// database connection configuration
 const defaultDataSource = new DataSource({
     type: "mysql",
     host: config.database.host,
     port: config.database.port,
-    username: config.database.username, // productionis ei soovitata kasutada kasutajanime "root"
+    username: config.database.username,
     password: config.database.password,
     database: config.database.db,
-    entities: [Article, Author],
+    entities: [Patient, Doctor, DoctorHistory, Drug, Hospital, HospitalAffiliation, InsuranceCompany, OfficeVisit, Prescription],
     synchronize: true,
 });
 
-// kontrollime, kas andmebaasi ühendust on võimalik luua
+// check if database connection can be established
 defaultDataSource
   .initialize()
   .then(() => {
