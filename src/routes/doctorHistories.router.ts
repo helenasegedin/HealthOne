@@ -1,3 +1,82 @@
+/**
+ * @api {get} / Get All Doctor Histories
+ * @apiName GetAllDoctorHistories
+ * @apiGroup DoctorHistory
+ *
+ * @apiDescription Get a list of all doctor histories.
+ *
+ * @apiSuccess (200) {Object[]} data List of doctor histories.
+ */
+
+/**
+ * @api {get} /:doctorId/:patientId Get Specific Doctor History
+ * @apiName GetDoctorHistory
+ * @apiGroup DoctorHistory
+ *
+ * @apiDescription Get a specific doctor history entry.
+ *
+ * @apiParam {Number} doctorId The ID of the doctor.
+ * @apiParam {Number} patientId The ID of the patient.
+ *
+ * @apiSuccess (200) {Object} data The retrieved doctor history.
+ * 
+ * @apiError (404 Not Found) NotFound Doctor history not found.
+ */
+
+/**
+ * @api {post} / Create Doctor History
+ * @apiName CreateDoctorHistory
+ * @apiGroup DoctorHistory
+ *
+ * @apiDescription Create a new doctor history entry.
+ *
+ * @apiParam {Number} doctorId The ID of the doctor.
+ * @apiParam {Number} patientId The ID of the patient.
+ * @apiParam {Date} startDate The start date of the doctor history.
+ * @apiParam {Date} [endDate] The end date of the doctor history (optional).
+ * @apiParam {String} [reasonForLeaving] The reason for leaving (optional).
+ *
+ * @apiSuccess (200) {Object} data The created doctor history entry.
+ * 
+ * @apiError (400 Bad Request) BadRequest Doctor history has missing or invalid parameters.
+ * @apiError (500 Internal Server Error) InternalServerError Failed to create doctor history.
+ */
+
+/**
+ * @api {put} /:doctorId/:patientId Update Doctor History
+ * @apiName UpdateDoctorHistory
+ * @apiGroup DoctorHistory
+ *
+ * @apiDescription Update an existing doctor history entry.
+ *
+ * @apiParam {Number} doctorId The ID of the doctor.
+ * @apiParam {Number} patientId The ID of the patient.
+ * @apiParam {Date} [startDate] The updated start date of the doctor history (optional).
+ * @apiParam {Date} [endDate] The updated end date of the doctor history (optional).
+ * @apiParam {String} [reasonForLeaving] The updated reason for leaving (optional).
+ *
+ * @apiSuccess (200) {Object} data The updated doctor history entry.
+ * 
+ * @apiError (404 Not Found) NotFound Doctor history not found.
+ * @apiError (400 Bad Request) BadRequest Doctor history has missing or invalid parameters.
+ * @apiError (500 Internal Server Error) InternalServerError Failed to update doctor history.
+ */
+
+/**
+ * @api {delete} /:doctorId/:patientId Delete Doctor History
+ * @apiName DeleteDoctorHistory
+ * @apiGroup DoctorHistory
+ * @apiDescription Delete an existing doctor history entry.
+ *
+ * @apiParam {Number} doctorId The ID of the doctor.
+ * @apiParam {Number} patientId The ID of the patient.
+ *
+ * @apiSuccess (200) {Object} data The deleted doctor history entry.
+ * 
+ * @apiError (404 Not Found) NotFound Doctor history not found.
+ * @apiError (500 Internal Server Error) InternalServerError Failed to delete doctor history.
+ */
+
 import express from 'express';
 import defaultDataSource from '../datasource';
 import { Patient } from "../entities/Patient";

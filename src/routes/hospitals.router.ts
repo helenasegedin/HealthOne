@@ -1,3 +1,135 @@
+/**
+ * @api {get} / Get Hospitals
+ * @apiName GetHospitals
+ * @apiGroup Hospital
+ *
+ * @apiDescription Retrieve a list of hospitals.
+ *
+ * @apiSuccess {Object[]} data List of hospitals.
+ *
+ * @apiError (500 Internal Server Error) {String} message Error message indicating the failure to fetch hospitals.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *         "message": "Could not fetch hospitals"
+ *     }
+ */
+/**
+ * @api {get} /:id Get Hospital
+ * @apiName GetHospital
+ * @apiGroup Hospital
+ *
+ * @apiDescription Get a specific hospital by ID.
+ *
+ * @apiParam {Number} id The ID of the hospital.
+ *
+ * @apiSuccess {Object} data The hospital.
+ *
+ * @apiError (404 Not Found) {String} error Error message indicating that the hospital was not found.
+ * @apiError (500 Internal Server Error) {String} message Error message indicating the failure to fetch the hospital.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *         "error": "Hospital not found"
+ *     }
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *         "message": "Could not fetch hospital"
+ *     }
+ */
+/**
+ * @api {post} / Create Hospital
+ * @apiName CreateHospital
+ * @apiGroup Hospital
+ *
+ * @apiDescription Create a new hospital.
+ *
+ * @apiParam {String} name The name of the hospital.
+ * @apiParam {String} address The address of the hospital.
+ * @apiParam {String} phone The phone number of the hospital.
+ *
+ * @apiError (400 Bad Request) {String} error Error message indicating missing or invalid parameters.
+ * @apiError (500 Internal Server Error) {String} message Error message indicating the failure to create a hospital.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *         "error": "Hospital has to have a name, address and phone number"
+ *     }
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *         "message": "Could not create hospital"
+ *     }
+ */
+/**
+ * @api {put} /:id Update Hospital
+ * @apiName UpdateHospital
+ * @apiGroup Hospital
+ *
+ * @apiDescription Update a specific hospital by ID.
+ *
+ * @apiParam {Number} id The ID of the hospital.
+ * @apiParam {String} [name] The updated name of the hospital.
+ * @apiParam {String} [address] The updated address of the hospital.
+ * @apiParam {String} [phone] The updated phone number of the hospital.
+ *
+ * @apiSuccess {Object} data The updated hospital.
+ *
+ * @apiError (404 Not Found) {String} error Error message indicating that the hospital was not found.
+ * @apiError (400 Bad Request) {String} error Error message indicating that the hospital must have a name, address, and phone number.
+ * @apiError (500 Internal Server Error) {String} message Error message indicating the failure to update the hospital.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *         "error": "Hospital not found"
+ *     }
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *         "error": "Hospital has to have a name, address, and phone number"
+ *     }
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *         "message": "Could not update hospital"
+ *     }
+ */
+/**
+ * @api {delete} /:id Delete Hospital
+ * @apiName DeleteHospital
+ * @apiGroup Hospital
+ *
+ * @apiDescription Delete a specific hospital by ID.
+ *
+ * @apiParam {Number} id The ID of the hospital.
+ *
+ * @apiSuccess {Object} data The deleted hospital.
+ *
+ * @apiError (404 Not Found) {String} error Error message indicating that the hospital was not found.
+ * @apiError (500 Internal Server Error) {String} message Error message indicating the failure to delete the hospital.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *         "error": "Hospital not found"
+ *     }
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *         "message": "Could not delete hospital"
+ *     }
+ */
+
 import express from 'express';
 import defaultDataSource from '../datasource';
 import { Hospital } from '../entities/Hospital';

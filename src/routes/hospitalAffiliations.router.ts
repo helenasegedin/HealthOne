@@ -1,3 +1,137 @@
+/**
+ * @api {get} / Get Hospital Affiliations
+ * @apiName GetHospitalAffiliations
+ * @apiGroup HospitalAffiliation
+ *
+ * @apiDescription Retrieve a list of hospital affiliations.
+ *
+ * @apiSuccess {Object[]} data List of hospital affiliations.
+ *
+ * @apiError (500 Internal Server Error) {String} message Error message indicating the failure to fetch hospital affiliations.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *         "message": "Could not fetch hospital affiliations"
+ *     }
+ */
+/**
+ * @api {get} /:doctorId/:hospitalId Get Hospital Affiliation
+ * @apiName GetHospitalAffiliation
+ * @apiGroup HospitalAffiliation
+ *
+ * @apiDescription Get the hospital affiliation for the specified doctor and hospital.
+ *
+ * @apiParam {Number} doctorId The ID of the doctor.
+ * @apiParam {Number} hospitalId The ID of the hospital.
+ *
+ * @apiSuccess {Object} data The hospital affiliation.
+ *
+ * @apiError (404 Not Found) {String} error Error message indicating that the hospital affiliation was not found.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *         "error": "Hospital affiliation not found"
+ *     }
+ *
+ * @apiError (500 Internal Server Error) {String} message Error message indicating the failure to fetch hospital affiliation.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *         "message": "Could not fetch hospital affiliation"
+ *     }
+ */
+
+/**
+ * @api {post} / Create Hospital Affiliation
+ * @apiName CreateHospitalAffiliation
+ * @apiGroup HospitalAffiliation
+ *
+ * @apiDescription Create a new hospital affiliation.
+ *
+ * @apiParam {Number} doctorId The ID of the doctor to associate with the hospital.
+ * @apiParam {Number} hospitalId The ID of the hospital to associate with the doctor.
+ * @apiParam {Date} [affiliationDate] The affiliation date (optional, defaults to the current date if not provided).
+ *
+ * @apiSuccess {Object} data The created hospital affiliation.
+ *
+ * @apiError (400 Bad Request) {String} error Error message indicating missing or invalid parameters.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *         "error": "Hospital affiliation has to have doctor ID, hospital ID and affiliation date"
+ *     }
+ *
+ * @apiError (500 Internal Server Error) {String} message Error message indicating the failure to create hospital affiliation.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *         "message": "Could not create hospital affiliation"
+ *     }
+ */
+/**
+ * @api {put} /:doctorId/:hospitalId Update Hospital Affiliation
+ * @apiName UpdateHospitalAffiliation
+ * @apiGroup HospitalAffiliation
+ *
+ * @apiDescription Update the affiliation date of the hospital affiliation for the specified doctor and hospital.
+ *
+ * @apiParam {Number} doctorId The ID of the doctor.
+ * @apiParam {Number} hospitalId The ID of the hospital.
+ *
+ * @apiParam {Date} [affiliationDate] The updated affiliation date.
+ *
+ * @apiSuccess {Object} data The updated hospital affiliation.
+ *
+ * @apiError (404 Not Found) {String} error Error message indicating that the hospital affiliation was not found.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *         "error": "Hospital affiliation not found"
+ *     }
+ *
+ * @apiError (500 Internal Server Error) {String} message Error message indicating the failure to update hospital affiliation.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *         "message": "Could not update hospital affiliation"
+ *     }
+ */
+/**
+ * @api {delete} /:doctorId/:hospitalId Delete Hospital Affiliation
+ * @apiName DeleteHospitalAffiliation
+ * @apiGroup HospitalAffiliation
+ *
+ * @apiDescription Delete the hospital affiliation for the specified doctor and hospital.
+ *
+ * @apiParam {Number} doctorId The ID of the doctor.
+ * @apiParam {Number} hospitalId The ID of the hospital.
+ *
+ * @apiSuccess {Object} data The deleted hospital affiliation.
+ *
+ * @apiError (404 Not Found) {String} error Error message indicating that the hospital affiliation was not found.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *         "error": "Hospital affiliation not found"
+ *     }
+ *
+ * @apiError (500 Internal Server Error) {String} message Error message indicating the failure to delete hospital affiliation.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *         "message": "Could not delete hospital affiliation"
+ *     }
+ */
+
 import express from 'express';
 import defaultDataSource from '../datasource';
 import { HospitalAffiliation } from '../entities/HospitalAffiliation';

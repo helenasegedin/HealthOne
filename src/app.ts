@@ -13,13 +13,14 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use('/api', express.static('api'));
 
 /**
  * 
  */
 app.get('/api', (req, res) => {
     // output APIdoc page
-    res.end("Hello");
+    res.redirect('./api/index.html');
 });
 
 // GET

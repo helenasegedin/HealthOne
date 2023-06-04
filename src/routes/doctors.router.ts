@@ -1,3 +1,120 @@
+/**
+ * @api {get} / Get All Doctors
+ * @apiName GetAllDoctors
+ * @apiGroup Doctor
+ * @apiDescription Get a list of all doctors.
+ *
+ * @apiSuccess (200) {Object[]} data List of doctors.
+ *
+ * @apiError (500 Internal Server Error) InternalServerError Failed to fetch doctors.
+ */
+
+/**
+ * @api {get} /:id Get Doctor
+ * @apiName GetDoctor
+ * @apiGroup Doctor
+ *
+ * @apiParam {Number} id ID of the doctor.
+ *
+ * @apiSuccess {Object} data Doctor object.
+ *
+ * @apiError (404 Not Found) NotFound Doctor with the given ID not found.
+ * @apiError (500 Internal Server Error) ServerError An unexpected error occurred during the query.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *         "error": "Doctor not found"
+ *     }
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *         "message": "Could not fetch doctor"
+ *     }
+ */
+
+/**
+ * @api {post} / Create Doctor
+ * @apiName CreateDoctor
+ * @apiGroup Doctor
+ *
+ * @apiParam {String} name Name of the doctor.
+ * @apiParam {String} address Address of the doctor.
+ * @apiParam {String} phone Phone number of the doctor.
+ * @apiParam {String} specialization Specialization of the doctor.
+ * @apiParam {String} hospitalAffiliation Hospital affiliation of the doctor.
+ *
+ * @apiSuccess {Object} data Created doctor object.
+ *
+ * @apiError (400 Bad Request) ValidationError One or more required fields are missing or empty.
+ * @apiError (500 Internal Server Error) ServerError An unexpected error occurred during the query.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *         "error": "Doctor has to have name, address, phone, specialization and hospital affiliation"
+ *     }
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *         "message": "Could not create doctor"
+ *     }
+ */
+/**
+ * @api {put} /:id Update Doctor
+ * @apiName UpdateDoctor
+ * @apiGroup Doctor
+ *
+ * @apiParam {Number} id ID of the doctor to update.
+ *
+ * @apiParam {String} [name] Updated name of the doctor.
+ * @apiParam {String} [address] Updated address of the doctor.
+ * @apiParam {String} [phone] Updated phone number of the doctor.
+ * @apiParam {String} [specialization] Updated specialization of the doctor.
+ * @apiParam {String} [hospitalAffiliation] Updated hospital affiliation of the doctor.
+ *
+ * @apiSuccess {Object} data Updated doctor object.
+ *
+ * @apiError (404 Not Found) NotFound Doctor with the given ID not found.
+ * @apiError (400 Bad Request) BadRequest Missing required fields for updating the doctor.
+ * @apiError (500 Internal Server Error) ServerError An unexpected error occurred during the query.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *         "error": "Doctor not found"
+ *     }
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *         "error": "Doctor has to have name, address, phone, specialization, and hospital affiliation"
+ *     }
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *         "message": "Could not update doctor"
+ *     }
+ */
+/**
+ * @api {delete} /:id Delete Doctor
+ * @apiName DeleteDoctor
+ * @apiGroup Doctor
+ *
+ * @apiParam {Number} id ID of the doctor to delete.
+ *
+ * @apiSuccess {Object} data Deleted doctor object.
+ *
+ * @apiError (404 Not Found) NotFound Doctor with the given ID not found.
+ * @apiError (500 Internal Server Error) ServerError An unexpected error occurred during the query.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *         "error": "Doctor not found"
+ *     }
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *         "message": "Could not delete doctor"
+ *     }
+ */
+
+
 import express from 'express';
 import defaultDataSource from '../datasource';
 import { Doctor } from '../entities/Doctor';
@@ -35,7 +152,6 @@ router.get("/", async(req, res) => {
         return res.status(500).json({ message: "Could not fetch doctors" });
       } 
 });
-
 
 // POST - create new doctor
 router.post("/", async (req, res) => {

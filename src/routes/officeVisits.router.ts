@@ -1,3 +1,162 @@
+/**
+ * @api {get} / Get All Office Visits
+ * @apiName GetAllOfficeVisits
+ * @apiGroup Office Visit
+ *
+ * @apiDescription Get a list of all office visits.
+ *
+ * @apiSuccess {Object[]} data List of office visits.
+ *
+ * @apiError (500 Internal Server Error) {String} message Error message indicating the failure to fetch office visits.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *         "message": "Could not fetch office visits"
+ *     }
+ */
+/**
+ * @api {get} /:patientId/:doctorId/:visitDate Get Office Visit
+ * @apiName GetOfficeVisit
+ * @apiGroup Office Visit
+ *
+ * @apiParam {Number} patientId ID of the patient.
+ * @apiParam {Number} doctorId ID of the doctor.
+ * @apiParam {Date} visitDate Date of the visit (format: YYYY-MM-DD).
+ *
+ * @apiSuccess {Object} data Office visit data.
+ *
+ * @apiError NotFound The requested office visit does not exist.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "Office visit not found"
+ *     }
+ *
+ * @apiError ServerError An unexpected error occurred while fetching the office visit.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *       "message": "Could not fetch office visit"
+ *     }
+ */
+/**
+ * @api {post} / Create Office Visit
+ * @apiName CreateOfficeVisit
+ * @apiGroup Office Visit
+ *
+ * @apiDescription Create a new office visit.
+ *
+ * @apiParam {Number} doctorId ID of the doctor associated with the office visit.
+ * @apiParam {Number} patientId ID of the patient associated with the office visit.
+ * @apiParam {Date} visitDate Date of the office visit (format: "YYYY-MM-DD").
+ * @apiParam {String} [symptoms] Symptoms reported during the office visit.
+ * @apiParam {Boolean} initialVisit Indicates if it is an initial visit.
+ * @apiParam {String} [initialDiagnosis] Initial diagnosis given during initial visit.
+ * @apiParam {Boolean} followupVisit Indicates if it is a follow-up visit.
+ * @apiParam {String} [diagnosisStatus] Diagnosis status for follow-up visits.
+ * @apiParam {Boolean} routineVisit Indicates if it is a routine visit.
+ * @apiParam {String} [bloodPressure] Blood pressure measurement during routine visit.
+ * @apiParam {Number} [height] Height measurement during routine visit.
+ * @apiParam {Number} [weight] Weight measurement during routine visit.
+ * @apiParam {String} [diagnosis] Diagnosis given during routine visit.
+ * @apiParam {Boolean} otherVisit Indicates if it is another type of visit.
+ *
+ * @apiSuccess {Object} data The created office visit.
+ *
+ * @apiError (400 Bad Request) {String} message Error message indicating the reason for the bad request.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *         "message": "Office visit has to have at least doctor ID, patient ID and date of visit"
+ *     }
+ *
+ * @apiError (500 Internal Server Error) {String} message Error message indicating the failure to create an office visit.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *         "message": "Could not create office visit"
+ *     }
+ */
+/**
+ * @api {put} /:patientId/:doctorId/:visitDate Update Office Visit
+ * @apiName UpdateOfficeVisit
+ * @apiGroup Office Visit
+ *
+ * @apiParam {Number} patientId ID of the patient.
+ * @apiParam {Number} doctorId ID of the doctor.
+ * @apiParam {Date} visitDate Date of the visit (format: YYYY-MM-DD).
+ *
+ * @apiParam {String} [symptoms] Symptoms reported during the visit.
+ * @apiParam {Boolean} [initialVisit] Indicates if it is an initial visit.
+ * @apiParam {String} [initialDiagnosis] Initial diagnosis made during the visit.
+ * @apiParam {Boolean} [followupVisit] Indicates if it is a follow-up visit.
+ * @apiParam {String} [diagnosisStatus] Diagnosis status during the follow-up visit.
+ * @apiParam {Boolean} [routineVisit] Indicates if it is a routine visit.
+ * @apiParam {String} [bloodPressure] Blood pressure measurement during the routine visit.
+ * @apiParam {Number} [height] Height measurement during the routine visit.
+ * @apiParam {Number} [weight] Weight measurement during the routine visit.
+ * @apiParam {String} [diagnosis] Diagnosis made during the visit.
+ * @apiParam {Boolean} [otherVisit] Indicates if it is another type of visit.
+ *
+ * @apiSuccess {Object} data Updated office visit data.
+ *
+ * @apiError NotFound The requested office visit does not exist.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "Office visit not found"
+ *     }
+ *
+ * @apiError BadRequest Invalid or missing parameters for updating the office visit.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "message": "Missing initial diagnosis"
+ *     }
+ *
+ * @apiError ServerError An unexpected error occurred while updating the office visit.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *       "message": "Could not update office visit"
+ *     }
+ */
+/**
+ * @api {delete} /:patientId/:doctorId/:visitDate Delete Office Visit
+ * @apiName DeleteOfficeVisit
+ * @apiGroup Office Visit
+ *
+ * @apiParam {Number} patientId ID of the patient.
+ * @apiParam {Number} doctorId ID of the doctor.
+ * @apiParam {Date} visitDate Date of the visit.
+ *
+ * @apiSuccess {Object} data Deleted office visit data.
+ *
+ * @apiError NotFound The requested office visit does not exist.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "Office visit not found"
+ *     }
+ *
+ * @apiError ServerError An unexpected error occurred while deleting the office visit.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *       "message": "Could not delete office visit"
+ *     }
+ */
+
 import express from 'express';
 import defaultDataSource from '../datasource';
 import { OfficeVisit } from '../entities/OfficeVisit';

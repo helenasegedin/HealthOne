@@ -1,3 +1,118 @@
+/**
+ * @api {get} / Get Insurance Companies
+ * @apiName GetInsuranceCompanies
+ * @apiGroup Insurance Company
+ *
+ * @apiDescription Get a list of all insurance companies.
+ *
+ * @apiSuccess {Object[]} data Array of insurance company objects.
+ *
+ * @apiError (500 Internal Server Error) {String} message Error message indicating the failure to fetch the insurance companies.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *         "message": "Could not fetch insurance companies"
+ *     }
+ */
+/**
+ * @api {get} /:id Get Insurance Company
+ * @apiName GetInsuranceCompany
+ * @apiGroup Insurance Company
+ *
+ * @apiDescription Get information about an insurance company.
+ *
+ * @apiParam {Number} id The ID of the insurance company.
+ *
+ * @apiSuccess {Object} data The insurance company information.
+ *
+ * @apiError (404 Not Found) {String} error Error message indicating that the insurance company was not found.
+ * @apiError (500 Internal Server Error) {String} message Error message indicating the failure to fetch the insurance company.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *         "error": "Insurance company not found"
+ *     }
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *         "message": "Could not fetch insurance company"
+ *     }
+ */
+
+/**
+ * @api {post} / Create Insurance Company
+ * @apiName CreateInsuranceCompany
+ * @apiGroup Insurance Company
+ *
+ * @apiDescription Create a new insurance company.
+ *
+ * @apiParam {String} name The name of the insurance company.
+ * @apiParam {String} phone The phone number of the insurance company.
+ *
+ * @apiSuccess {Object} data The created insurance company.
+ *
+ * @apiError (400 Bad Request) {String} error Error message indicating missing name or phone number.
+ * @apiError (500 Internal Server Error) {String} message Error message indicating the failure to create the insurance company.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *         "error": "Insurance company has to have a name and phone number"
+ *     }
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *         "message": "Could not create insurance company"
+ *     }
+ */
+/**
+ * @api {put} /:id Update Insurance Company
+ * @apiName UpdateInsuranceCompany
+ * @apiGroup Insurance Company
+ *
+ * @apiDescription Update an existing insurance company.
+ *
+ * @apiParam {Number} id The ID of the insurance company to update.
+ * @apiParam {String} [name] The updated name of the insurance company.
+ * @apiParam {String} [phone] The updated phone number of the insurance company.
+ *
+ * @apiSuccess {Object} data Updated insurance company object.
+ *
+ * @apiError (400 Bad Request) {String} error Error message indicating the missing name or phone number in the request body.
+ * @apiError (404 Not Found) {String} error Error message indicating that the insurance company was not found.
+ * @apiError (500 Internal Server Error) {String} message Error message indicating the failure to update the insurance company.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *         "error": "Insurance company not found"
+ *     }
+ */
+/**
+ * @api {delete} /:id Delete Insurance Company
+ * @apiName DeleteInsuranceCompany
+ * @apiGroup Insurance Company
+ *
+ * @apiDescription Delete an existing insurance company.
+ *
+ * @apiParam {Number} id The ID of the insurance company to delete.
+ *
+ * @apiSuccess {Object} data Deleted insurance company object.
+ *
+ * @apiError (404 Not Found) {String} error Error message indicating that the insurance company was not found.
+ * @apiError (500 Internal Server Error) {String} message Error message indicating the failure to delete the insurance company.
+ *
+ * @apiErrorExample {json} Error Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *         "error": "Insurance company not found"
+ *     }
+ */
+
 import express from 'express';
 import defaultDataSource from '../datasource';
 import { InsuranceCompany } from '../entities/InsuranceCompany';

@@ -1,3 +1,154 @@
+/**
+ * @api {get} / Get All Prescriptions
+ * @apiName GetPrescriptions
+ * @apiGroup Prescription
+ *
+ * @apiSuccess {Object[]} data List of prescriptions.
+ *
+ * @apiError ServerError An unexpected error occurred while fetching the prescriptions.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *       "message": "Could not fetch prescriptions"
+ *     }
+ */
+/**
+ * @api {get} /:rxId Get Prescription
+ * @apiName GetPrescription
+ * @apiGroup Prescription
+ *
+ * @apiParam {Number} rxId The ID of the prescription to retrieve.
+ *
+ * @apiSuccess {Object} data The retrieved prescription object.
+ *
+ * @apiError NotFound The prescription with the specified ID was not found.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "Prescription not found"
+ *     }
+ *
+ * @apiError ServerError An unexpected error occurred while fetching the prescription.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *       "message": "Could not fetch prescription"
+ *     }
+ */
+/**
+ * @api {post} / Create Prescription
+ * @apiName CreatePrescription
+ * @apiGroup Prescription
+ *
+ * @apiParam {String} datePrescribed The date the prescription was prescribed.
+ * @apiParam {String} dosage The dosage of the prescription.
+ * @apiParam {Date} duration The duration of the prescription.
+ * @apiParam {Boolean} refillable Indicates if the prescription is refillable.
+ * @apiParam {Number} [refillNo] The number of refills for the prescription (required if refillable is true).
+ * @apiParam {String} [comments] Additional comments for the prescription.
+ * @apiParam {String} [nonRefillReason] The reason for the prescription not being refillable.
+ * @apiParam {Number} patientId The ID of the patient associated with the prescription.
+ * @apiParam {Number} doctorId The ID of the doctor who prescribed the medication.
+ * @apiParam {Number} drugId The ID of the drug being prescribed.
+ *
+ * @apiSuccess {Object} data The created prescription object.
+ *
+ * @apiError BadRequest The request is missing required parameters or contains invalid data.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "error": "Prescription has to have date prescribed, dosage, duration, refillability, patient ID, doctor ID and drug ID"
+ *     }
+ *
+ * @apiError NotFound The patient, doctor, or drug with the specified ID was not found.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "message": "Patient with given ID not found"
+ *     }
+ *
+ * @apiError ServerError An unexpected error occurred while creating the prescription.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *       "message": "Could not create prescription"
+ *     }
+ */
+/**
+ * @api {put} /:rxId Update Prescription
+ * @apiName UpdatePrescription
+ * @apiGroup Prescription
+ *
+ * @apiParam {Number} rxId The ID of the prescription to update.
+ * @apiParam {Date} [datePrescribed] The date the prescription was prescribed.
+ * @apiParam {String} [dosage] The dosage of the prescription.
+ * @apiParam {Date} [duration] The duration of the prescription.
+ * @apiParam {Boolean} [refillable] Indicates if the prescription is refillable.
+ * @apiParam {Number} [refillNo] The number of refills for the prescription.
+ * @apiParam {String} [comments] Additional comments for the prescription.
+ * @apiParam {String} [nonRefillReason] The reason why the prescription is non-refillable.
+ * @apiParam {Number} [patientId] The ID of the patient associated with the prescription.
+ * @apiParam {Number} [doctorId] The ID of the doctor associated with the prescription.
+ * @apiParam {Number} [drugId] The ID of the drug associated with the prescription.
+ *
+ * @apiSuccess {Object} data The updated prescription object.
+ *
+ * @apiError NotFound The prescription with the specified ID was not found.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "Prescription not found"
+ *     }
+ *
+ * @apiError BadRequest Some of the required parameters are missing or invalid.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "error": "Prescription has to have date prescribed, dosage, duration, refillability, patient ID, doctor ID, and drug ID"
+ *     }
+ *
+ * @apiError ServerError An unexpected error occurred while updating the prescription.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *       "message": "Could not update prescription"
+ *     }
+ */
+/**
+ * @api {delete} /:rxId Delete Prescription
+ * @apiName DeletePrescription
+ * @apiGroup Prescription
+ *
+ * @apiParam {Number} rxId The ID of the prescription to delete.
+ *
+ * @apiSuccess {Object} data The deleted prescription object.
+ *
+ * @apiError NotFound The prescription with the specified ID was not found.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "Prescription not found"
+ *     }
+ *
+ * @apiError ServerError An unexpected error occurred while deleting the prescription.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *       "message": "Could not delete prescription"
+ *     }
+ */
+
 import express from 'express';
 import defaultDataSource from '../datasource';
 import { Prescription } from '../entities/Prescription';

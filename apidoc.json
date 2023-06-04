@@ -1,0 +1,9 @@
+{
+    "name": "Health One Medical Database Documentation",
+    "version": "1.0.0",
+    "description": "Documentation for the Health One Medical Database",
+    "title": "Health One Medical Database",
+    "url": "http://localhost:3000",
+    "src": "./src",
+    "dest": "./api"
+  }  

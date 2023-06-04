@@ -1,3 +1,224 @@
+/**
+ * @api {get} / Get All Patients
+ * @apiName GetAllPatients
+ * @apiGroup Patient
+ *
+ * @apiSuccess {Object[]} data List of patients.
+ *
+ * @apiError ServerError An unexpected error occurred while fetching the patients.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *       "message": "Could not fetch patients"
+ *     }
+ */
+/**
+ * @api {get} /:id Get Patient by ID
+ * @apiName GetPatientByID
+ * @apiGroup Patient
+ *
+ * @apiParam {Number} id Patient's unique ID.
+ *
+ * @apiSuccess {Object} data The patient object with the specified ID.
+ *
+ * @apiError PatientNotFound The patient with the given ID was not found.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "Patient not found"
+ *     }
+ *
+ * @apiError ServerError An unexpected error occurred while fetching the patient.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *       "message": "Could not fetch patient"
+ *     }
+ */
+
+/**
+ * @api {post} / Create a Patient
+ * @apiName CreatePatient
+ * @apiGroup Patient
+ *
+ * @apiParam {String} name Patient's name.
+ * @apiParam {String} address Patient's address.
+ * @apiParam {String} phone Patient's phone number.
+ * @apiParam {String} email Patient's email address.
+ * @apiParam {Number} insuranceOwnerId ID of the insurance owner (if relationship is "dependent").
+ * @apiParam {String} relationship Patient's status as either "insuranceOwner" or "dependent".
+ * @apiParam {Number} doctorId ID of the doctor associated with the patient.
+ * @apiParam {Number} insuranceId ID of the insurance company associated with the patient.
+ *
+ * @apiSuccess {Object} data The created patient object.
+ *
+ * @apiError ValidationError The request body is missing required parameters or contains invalid data.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "error": "Patient has to have name, address, phone, email, relationship, doctor ID and insurance ID"
+ *     }
+ *
+ * @apiError InvalidRelationship The provided relationship type is invalid.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "error": "Invalid relationship type"
+ *     }
+ *
+ * @apiError MissingInsuranceOwner The insurance owner ID is required for dependent patients.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "error": "Insurance owner ID is required for dependent patients"
+ *     }
+ *
+ * @apiError InsuranceOwnerNotFound The insurance owner with the given ID was not found.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "message": "Insurance owner with given ID not found"
+ *     }
+ *
+ * @apiError DoctorNotFound The doctor with the given ID was not found.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "message": "Doctor with given ID not found"
+ *     }
+ *
+ * @apiError InsuranceCompanyNotFound The insurance company with the given ID was not found.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "message": "Insurance company with given ID not found"
+ *     }
+ *
+ * @apiError ServerError An unexpected error occurred while creating the patient.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *       "message": "Could not create patient"
+ *     }
+ */
+/**
+ * @api {put} /:id Update Patient
+ * @apiName UpdatePatient
+ * @apiGroup Patient
+ *
+ * @apiParam {Number} id Patient's unique ID.
+ *
+ * @apiParam {String} [name] Patient's name.
+ * @apiParam {String} [address] Patient's address.
+ * @apiParam {String} [phone] Patient's phone number.
+ * @apiParam {String} [email] Patient's email address.
+ * @apiParam {Number} [insuranceOwnerId] ID of the insurance owner for dependent patients.
+ * @apiParam {String} [relationship] Patient's status as 'insuranceOwner' or 'dependent'.
+ * @apiParam {Number} [doctorId] ID of the patient's doctor.
+ * @apiParam {Number} [insuranceId] ID of the patient's insurance company.
+ *
+ * @apiSuccess {Object} data The updated patient object.
+ *
+ * @apiError PatientNotFound The patient with the given ID was not found.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "Patient not found"
+ *     }
+ *
+ * @apiError InvalidInput Some required fields are missing or invalid.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "error": "Patient has to have name, address, phone, email, relationship, doctor ID and insurance ID"
+ *     }
+ *
+ * @apiError InvalidRelationship The provided relationship type is invalid.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "error": "Invalid relationship type"
+ *     }
+ *
+ * @apiError MissingInsuranceOwnerID Insurance owner ID is required for dependent patients.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "error": "Insurance owner ID is required for dependent patients"
+ *     }
+ *
+ * @apiError InsuranceOwnerNotFound The insurance owner with the given ID was not found.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "message": "Insurance owner with given ID not found"
+ *     }
+ *
+ * @apiError DoctorNotFound The doctor with the given ID was not found.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "message": "Doctor with given ID not found"
+ *     }
+ *
+ * @apiError InsuranceCompanyNotFound The insurance company with the given ID was not found.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "message": "Insurance company with given ID not found"
+ *     }
+ *
+ * @apiError ServerError An unexpected error occurred while updating the patient.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *       "message": "Could not update patient"
+ *     }
+ */
+/**
+ * @api {delete} /:id Delete Patient
+ * @apiName DeletePatient
+ * @apiGroup Patient
+ *
+ * @apiParam {Number} id Patient's unique ID.
+ *
+ * @apiSuccess {Object} data The deleted patient object.
+ *
+ * @apiError PatientNotFound The patient with the given ID was not found.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "Patient not found"
+ *     }
+ *
+ * @apiError ServerError An unexpected error occurred while deleting the patient.
+ *
+ * @apiErrorExample Error Response:
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *       "message": "Could not delete patient"
+ *     }
+ */
+
 import express from 'express';
 import defaultDataSource from '../datasource';
 import { Patient } from "../entities/Patient";
