@@ -15,14 +15,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use('/api', express.static('api'));
 
-/**
- * 
- */
-app.get('/api', (req, res) => {
-    // output APIdoc page
-    res.redirect('./api/index.html');
-});
-
 // GET
 app.use("/api/patients", patientsRouter);   
 app.use("/api/doctors", doctorsRouter);

@@ -11,7 +11,6 @@
     "config": "^3.3.9",
     "express": "^4.18.2",
     "metadata": "^0.1.0",
-    "mssql": "^7.3.5",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.22",
     "reflect": "^0.1.3",
